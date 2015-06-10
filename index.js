@@ -6,5 +6,5 @@ app.use('/forex', forexapi);
 
 
 var server = app.listen(3000, function () {
-  console.log('Example app listening');
+  console.log('App running');
 });

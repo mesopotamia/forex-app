@@ -1,6 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var forex = require('./forex');
+var express = require('express'),
+    router = express.Router(),
+    forex = require('./forex'),
+    session = require('./libs/core/session');
+
+router.use(session());
 
 router.get('/instruments', function (req, res) {
     forex.getQuotes(function (body) {
@@ -8,7 +11,7 @@ router.get('/instruments', function (req, res) {
     });
 });
 router.get('/', function (req, res) {
-    res.end('main instruments endpoint');
+    res.send('You\'re in!');
 });
 
 module.exports = router;

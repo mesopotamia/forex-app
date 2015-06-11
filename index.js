@@ -4,6 +4,9 @@ var express = require('express'),
 
 app.use('/forex', forexapi);
 
+app.get('/', function (req, res) {
+    res.send('Welcome to my forex app');
+})
 
 var server = app.listen(3000, function () {
   console.log('App running');

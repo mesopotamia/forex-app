@@ -1,8 +1,8 @@
 var express = require('express'),
     app = express(),
-    forexapi = require('./forex-api');
+    rates = require('./libs/rates');
 
-app.use('/forex', forexapi);
+app.use('/rates', rates);
 
 app.get('/', function (req, res) {
     res.send('Welcome to my forex app');

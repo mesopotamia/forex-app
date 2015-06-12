@@ -1,13 +1,22 @@
-var express = require('express'),
+var express = require("express"),
     app = express(),
-    rates = require('./libs/rates');
+    rates = require("./libs/rates"),
+    headers = require("./libs/core/headers"),
+    mongoose = require("mongoose"),
+    bodyParser = require("body-parser"),
+    auth = require("./libs/authentication");
 
-app.use('/rates', rates);
+mongoose.connect("mongodb://localhost/test");
 
-app.get('/', function (req, res) {
-    res.send('Welcome to my forex app');
+app.use(headers());
+
+app.use("/rates", rates);
+app.use("/auth", auth);
+
+app.get("/", function (req, res) {
+    res.send("Welcome to my forex app");
 })
 
 var server = app.listen(3000, function () {
-  console.log('App running');
+  console.log("App running");
 });

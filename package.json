@@ -9,6 +9,12 @@
   "author": "Marwan Aziz",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.12.4"
+    "body-parser": "^1.12.4",
+    "express": "^4.12.4",
+    "jsonwebtoken": "^5.0.1",
+    "mongoose": "^4.0.5"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
   }
 }

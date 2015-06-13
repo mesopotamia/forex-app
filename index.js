@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/test");
 app.use(headers());
 
 app.use("/rates", rates);
-app.use("/auth", auth);
+app.use("/auth", bodyParser.urlencoded({ extended: true }), auth);
 
 app.get("/", function (req, res) {
     res.send("Welcome to my forex app");
@@ -19,4 +19,8 @@ app.get("/", function (req, res) {
 
 var server = app.listen(3000, function () {
   console.log("App running");
+});
+
+process.on('uncaughtException', function(err) {
+    console.log(err);
 });

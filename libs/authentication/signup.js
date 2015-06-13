@@ -1,9 +1,10 @@
 var router = require("express").Router(),
     jwt = require("jsonwebtoken"),
     mongoose = require("mongoose"),
-    User = require("../../models/user");
+    User = require("../../models/user"),
+    util = require("./util");
 
-router.post("*", validateCredentials, checkExisting, createUser);
+router.post("*", util.validateCredentials, checkExisting, createUser);
 
 function checkExisting (req, res, next) {
     var email = req.body && req.body.email || null;
@@ -22,18 +23,6 @@ function checkExisting (req, res, next) {
             next();
         }
     });
-};
-
-function validateCredentials (req, res, next) {
-    var email = req.body && req.body.email || null;
-    var password = req.body && req.body.password || null;
-    if(!password || !email){
-        res.json({
-            type: false,
-            data: "invalid credentials"
-        });
-    }
-    next();
 };
 
 function createUser (req, res, next) {

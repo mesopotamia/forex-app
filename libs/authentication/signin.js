@@ -13,9 +13,11 @@ function checkValidUser (req, res, next) {
         if (err) { res.json({type: false, data: err}); }
 
         if (user) {
+            var token = jwt.sign(user, "shhhh");
             res.status(200).json({
                 type: true,
-                data: user
+                data: user,
+                token: token
             });
         }
 

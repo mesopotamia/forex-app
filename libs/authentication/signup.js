@@ -1,5 +1,4 @@
 var router = require("express").Router(),
-    jwt = require("jsonwebtoken"),
     mongoose = require("mongoose"),
     User = require("../../models/user"),
     util = require("./util");
@@ -38,12 +37,10 @@ function createUser (req, res, next) {
 
             if (err) { res.json({type: false, data: err}); }
 
-            user.token = jwt.sign(user, "shhhhh");
             user.save(function(err, user1) {
                 res.json({
                     type: true,
-                    data: user1,
-                    token: user1.token
+                    data: user1
                 });
             });
         });

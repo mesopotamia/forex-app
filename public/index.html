@@ -1,62 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="forex">
 <head>
 <meta charset="UTF-8">
 <title>Forex App</title>
+
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
 
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" href="styles/base.css">
 
 </head>
 
-<body ng-app="forex" ng-controller="mainController">
+<body>
 
-    <div id="container" >
-        <h1>Welcome to Forex</h1>
-        <form id="form_id">
-            <div class="field">
-                <label for="email">Email</label>
-                <input type="text" name="email" value="" ng-model="email">
-            </div>
-            <div class="field">
-                <label for="password">Password</label>
-                <input type="text" name="password" value="" ng-model="password">
-            </div>
-            <button ng-click="submitThis()">Signin</button>
-        </form>
-
-    </div>
-
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript">
-
-
-        angular.module("forex", [])
-            .controller("mainController", function ($scope, $http){
-
-                $scope.submitThis = function () {
-                    $http({
-                        method: 'POST',
-                        url: "http://localhost:3000/auth/signin",
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(obj) {
-                            var str = [];
-                            for(var p in obj)
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                                return str.join("&");
-                        },
-                        data: { email: $scope.email, password: $scope.password}
-                    })
-                    .success(function(data){
-                        console.log(data);
-                    }).error(function(err){
-                        console.log(err);
-                    })
-                }
-            });
-
-
-    </script>
+    <div id="container" ng-view></div>
 
 </body>
 

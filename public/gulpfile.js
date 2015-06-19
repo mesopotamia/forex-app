@@ -1,14 +1,29 @@
-var gulp = require("gulp");
+/**
+ *  Welcome to your gulpfile!
+ *  The gulp tasks are splitted in several files in the gulp directory
+ *  because putting all here was really too long
+ */
 
-var concat = require("gulp-concat");
-var watch = require("gulp-watch");
+'use strict';
 
-gulp.task("concat", function () {
-    gulp.src(['app/app.js', 'app/*.js', 'app/*/*.js'])
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('./dist/'));
+var gulp = require('gulp');
+var wrench = require('wrench');
+
+/**
+ *  This will load all js or coffee files in the gulp directory
+ *  in order to load all gulp tasks
+ */
+wrench.readdirSyncRecursive('./gulp').filter(function(file) {
+  return (/\.(js|coffee)$/i).test(file);
+}).map(function(file) {
+  require('./gulp/' + file);
 });
 
-gulp.task("watch", function () {
-    gulp.watch(["app/app.js", "app/*.js", "app/*/*.js"], ["concat"]);
+
+/**
+ *  Default task clean temporaries directories and launch the
+ *  main optimization build task
+ */
+gulp.task('default', ['clean'], function () {
+  gulp.start('build');
 });

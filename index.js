@@ -17,7 +17,7 @@ app.get("/", function (req, res) {
     res.send("Welcome to my forex app");
 })
 
-var server = app.listen(3000, function () {
+var server = app.listen(4000, function () {
   console.log("App running");
 });
 

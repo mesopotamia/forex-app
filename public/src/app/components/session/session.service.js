@@ -5,23 +5,24 @@
 
     function sessionManager ($http, $cookies) {
         var apiHost = "http://localhost:4000/auth/signin";
+        var sessionData;
 
         var service = {
             getSession: getSession,
             setSession: setSession,
             authenticate: authenticate
-        }
+        };
 
         return service;
-        var sessionData;
+
 
         function getSession () {
             return sessionData
-        };
+        }
 
         function setSession (data) {
             sessionData = data;
-        };
+        }
 
         function authenticate (email, password) {
             if(sessionData){
@@ -43,15 +44,15 @@
             .success(authenticationComplete).error(authenticationFailed);
 
             function authenticationComplete (response) {
-                $cookies.put("forex-token", response.token)
+                $cookies.put("forex-token", response.token);
                 sessionData = response;
-            };
+            }
 
             function authenticationFailed (error) {
                 console.log(error);
-            };
+            }
 
-        };
+        }
 
     }
 })();

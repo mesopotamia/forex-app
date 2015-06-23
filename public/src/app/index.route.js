@@ -19,6 +19,12 @@
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController',
         controllerAs: 'vm'
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'app/signup/signup.html',
+        controller: 'SignupController',
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/dashboard');

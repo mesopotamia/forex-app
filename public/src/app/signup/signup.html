@@ -1,0 +1,20 @@
+<h3>Sign Up</h3>
+<form id="form_signup">
+    <div class="field">
+        <label for="name">First Name</label>
+        <input type="text" name="name" value="" ng-model="vm.name">
+    </div>
+    <div class="field">
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" value="" ng-model="vm.lname">
+    </div>
+    <div class="field">
+        <label for="email">Email</label>
+        <input type="text" name="email" value="" ng-model="vm.email">
+    </div>
+    <div class="field">
+        <label for="password">Password</label>
+        <input type="text" name="password" value="" ng-model="vm.password">
+    </div>
+    <button ng-click="signup()">Sign up</button>
+</form>

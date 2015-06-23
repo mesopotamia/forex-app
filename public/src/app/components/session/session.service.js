@@ -3,7 +3,7 @@
         .module("forex")
         .factory("session", sessionManager);
 
-    function sessionManager ($http, $cookies) {
+    function sessionManager ($http, $cookies, $localStorage) {
         var apiHost = "http://localhost:4000/auth/signin";
         var sessionData;
 
@@ -44,6 +44,7 @@
             .success(authenticationComplete).error(authenticationFailed);
 
             function authenticationComplete (response) {
+                $localStorage.user = response.data;
                 $cookies.put("forex-token", response.token);
                 sessionData = response;
             }

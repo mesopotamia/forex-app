@@ -4,7 +4,7 @@
         .factory('signup', Signup);
 
     function Signup ($http) {
-        var apiHost = "http://localhost:4000/auth/signup";
+        var apiHost = "http://localhost:4000/api/users/";
 
         return {
             submit: submit

@@ -4,12 +4,15 @@ var express = require("express"),
     headers = require("./libs/core/headers"),
     mongoose = require("mongoose"),
     bodyParser = require("body-parser"),
-    auth = require("./libs/authentication");
+    auth = require("./libs/authentication"),
+    usersAPI = require("./api/users");
 
 mongoose.connect("mongodb://localhost/test");
 
 app.use(headers());
+app.use(bodyParser.urlencoded());
 
+app.use("/api", usersAPI);
 app.use("/rates", rates);
 app.use("/auth", bodyParser.urlencoded({ extended: true }), auth);
 

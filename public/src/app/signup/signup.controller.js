@@ -9,7 +9,7 @@
         $scope.signup = function () {
             console.log("signing up");
 
-            signup.submit({fname: vm.fname, lname: vm.lname, email: vm.email, password: vm.password});
+            signup.submit({firstName: vm.fname, lastName: vm.lname, email: vm.email, password: vm.password});
         }
     }
 })();

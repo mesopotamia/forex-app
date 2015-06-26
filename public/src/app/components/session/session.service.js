@@ -4,7 +4,7 @@
         .factory("session", sessionManager);
 
     function sessionManager ($http, $cookies, $localStorage) {
-        var apiHost = "http://localhost:4000/auth/signin";
+        var apiHost = "http://localhost:4000/api/user/";
         var sessionData;
 
         var service = {

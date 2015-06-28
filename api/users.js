@@ -1,21 +1,23 @@
 var router = require('express').Router(),
     mongoose = require('mongoose'),
     User = require('../models/user'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    entitlement = require('../libs/core/entitlements').entitlement,
+    superEntitlement = require('../libs/core/entitlements').superEntitlement;
 
 router
     .route('/users')
         .post(postUsers)
-        .get(getUsers);
+        .get(superEntitlement, getUsers);
 router
     .route('/user')
         .post(postUser);
 
 router
     .route('user/:userid')
-        .get(getUser)
-        .put(updateUser)
-        .delete(deleteUser);
+        .get(entitlement, getUser)
+        .put(entitlement, updateUser)
+        .delete(entitlement, deleteUser);
 
 function postUsers (req, res) {
     var user = new User();
@@ -54,7 +56,7 @@ function postUser (req, res, next) {
         if(record){
             res.status(200).json({
                 data: record,
-                token: jwt.sign(record.email, 'shhhhx4')
+                token: jwt.sign(record.id, 'shhhhx4')
             });
         }
         else {

@@ -1,9 +1,11 @@
 var router = require('express').Router(),
-    mongoose = require('mongoose'),
     User = require('../models/user'),
     jwt = require('jsonwebtoken'),
     entitlement = require('../libs/core/entitlements').entitlement,
-    superEntitlement = require('../libs/core/entitlements').superEntitlement;
+    superEntitlement = require('../libs/core/entitlements').superEntitlement,
+    util = require('../libs/core/tokenUtil'),
+    responses = require('../libs/core/responses'),
+    responseUtil = require('../libs/core/responseUtil');
 
 router
     .route('/users')
@@ -11,13 +13,14 @@ router
         .get(superEntitlement, getUsers);
 router
     .route('/user')
-        .post(postUser);
+        .post(postUser)
+        .get(getUserByToken);
 
 router
     .route('user/:userid')
-        .get(entitlement, getUser)
-        .put(entitlement, updateUser)
-        .delete(entitlement, deleteUser);
+        .get(superEntitlement, getUser)
+        .put(superEntitlement, updateUser)
+        .delete(superEntitlement, deleteUser);
 
 function postUsers (req, res) {
     var user = new User();
@@ -67,6 +70,18 @@ function postUser (req, res, next) {
     })
 }
 
+function getUserByToken (req, res, next) {
+    var id = util.getID(util.getToken(req));
+    User.findOne({_id: id}, function (error, record) {
+        if(error){
+            responseUtil.send(responses.INVALID_TOKEN);
+        }
+        res.json({
+            data: record
+        });
+    })
+
+};
 function getUser () {};
 function updateUser () {};
 function deleteUser () {};

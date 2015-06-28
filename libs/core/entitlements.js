@@ -1,11 +1,11 @@
-var util = require('./responseUtil');
-var responses = require('./responses');
-var jwt = require('jsonwebtoken');
-var User = require('../../models/user');
+var util = require('./responseUtil'),
+    responses = require('./responses'),
+    User = require('../../models/user'),
+    tokenUtil = require('./tokenUtil');
 
 var entitlement = function (req, res, next) {
-    var token = getToken(req);
-    var id = jwt.decode(token);
+    var token = tokenUtil.getToken(req);
+    var id = tokenUtil.getID(token);
     User.findOne(id, function (err, record) {
         if(err){
             util.send(res, responses.GLOBAL_ERROR);
@@ -15,27 +15,17 @@ var entitlement = function (req, res, next) {
 };
 
 var superEntitlement = function (req, res, next) {
-    var token = getToken(req);
-    var id = jwt.decode(token);
+    var token = tokenUtil.getToken(req);
+    var id = tokenUtil.getID(token);
     User.findOne({_id: id}, function (err, record) {
         if(err){
-            util.send(res, responses.globalError);
+            util.send(res, responses.GLOBAL_ERROR);
         }
         if(record.role !== 'super'){
             util.send(res, responses.NOT_ENTITLED);
         }
         return next();
     });
-};
-
-var getToken = function (req) {
-    var bearerToken;
-    var bearerHeader = req.headers["authorization"];
-    if (typeof bearerHeader !== 'undefined') {
-        var bearer = bearerHeader.split(" ");
-        bearerToken = bearer[1];
-        return bearerToken;
-    }
 };
 
 module.exports = {

@@ -10,5 +10,9 @@ module.exports = {
     GLOBAL_ERROR: {
         status: 400,
         message: 'Error occured'
+    },
+    RECORD_NOT_FOUND: {
+        status: 403,
+        message: 'Record not found'
     }
 };

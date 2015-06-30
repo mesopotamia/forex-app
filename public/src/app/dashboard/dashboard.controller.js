@@ -3,8 +3,8 @@
         .module("forex")
         .controller("DashboardController", Dashboard);
 
-    function Dashboard ($scope, $cookies, $location, session, $localStorage) {
-        if(!$cookies.get("forex-token")){
+    function Dashboard ($scope, $location, $localStorage) {
+        if(!$localStorage["forex-token"]){
             $location.path("/signon");
         }
         var vm = this;

@@ -3,7 +3,7 @@
         .module('forex')
         .factory('UsersService', UsersService);
 
-    function UsersService ($resource, $localStorage, $cookies) {
+    function UsersService ($resource, $localStorage) {
         return $resource('http://localhost:4000/api/user/:user', {user: '@user'}, {
             signin: {
                 method: 'POST',
@@ -13,7 +13,7 @@
                         if(response.status == 200 && response.data.token){
                             // TODO clean up server response
                             $localStorage.user = response.data.data;
-                            $cookies.put("forex-token", response.data.token);
+                            $localStorage["forex-token"] = response.data.token;
                         }
                         return response;
                     },

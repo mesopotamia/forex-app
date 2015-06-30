@@ -4,8 +4,8 @@
 
   angular
     .module('forex')
-    .constant('malarkey', malarkey)
-    .constant('toastr', toastr)
-    .constant('moment', moment);
+    .constant('ENV', {
+        api: 'http://localhost:4000/api/'
+    });
 
 })();

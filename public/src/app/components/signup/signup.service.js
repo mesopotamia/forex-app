@@ -1,3 +1,4 @@
+// TODO port over to a more resetful signup (like sign on)
 (function () {
     angular
         .module('forex')

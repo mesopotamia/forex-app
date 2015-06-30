@@ -9,7 +9,7 @@ var express = require("express"),
 mongoose.connect("mongodb://localhost/test");
 
 app.use(headers());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
 app.use("/api", usersAPI);
 app.use("/rates", rates);

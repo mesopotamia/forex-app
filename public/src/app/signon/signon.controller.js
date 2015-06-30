@@ -3,7 +3,7 @@
         .module("forex")
         .controller("SignOnController", SignOn );
 
-    function SignOn ($scope, $http, $location, $cookies, session, UsersService){
+    function SignOn ($scope, $http, $location, UsersService){
         var vm = this;
 
         $scope.submitThis = function () {

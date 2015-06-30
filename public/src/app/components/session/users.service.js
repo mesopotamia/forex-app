@@ -3,8 +3,8 @@
         .module('forex')
         .factory('UsersService', UsersService);
 
-    function UsersService ($resource, $localStorage) {
-        return $resource('http://localhost:4000/api/user/:user', {user: '@user'}, {
+    function UsersService ($resource, $localStorage, ENV) {
+        return $resource(ENV.api+'user/:user', {user: '@user'}, {
             signin: {
                 method: 'POST',
                 interceptor: {

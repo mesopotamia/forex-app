@@ -14,11 +14,13 @@ fs.readFile('./fxtrade', function (error, data) {
         fxtrade.host = data.host;
         fxtrade.accountId = data.accountId;
         fxtrade.token = data.token;
+        
+        fxtrade.apiVersion = '/v1/';
+        fxtrade.prices = fxtrade.apiVersion + 'prices?accountId=' + fxtrade.accountId + '&instruments=';
+        fxtrade.instruments = fxtrade.apiVersion + 'instruments?accountId=' + fxtrade.accountId;
     }
 });
 
-fxtrade.apiVersion = '/v1/';
-fxtrade.prices = fxtrade.apiVersion + 'prices?accountId=' + fxtrade.accountId + '&instruments=';
 
 config.fxtrade = fxtrade;
 

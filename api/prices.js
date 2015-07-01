@@ -24,7 +24,9 @@ function getPrices (req, res) {
     console.log(config.fxtrade.host + config.fxtrade.prices + req.query.instruments);
     request(options, function (error, response, body) {
         if(!error && response.statusCode == 200) {
-            res.json({data: body});
+            res.json({
+                data: body
+            });
         }
         responseUtil.send(res, responses.GLOBAL_ERROR);
     })

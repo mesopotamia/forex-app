@@ -6,7 +6,7 @@ var util = require('./responseUtil'),
 var entitlement = function (req, res, next) {
     var token = tokenUtil.getToken(req);
     var id = tokenUtil.getID(token);
-    User.findOne(id, function (err, record) {
+    User.findOne({_id: id}, function (err, record) {
         if(err){
             util.send(res, responses.GLOBAL_ERROR);
         }

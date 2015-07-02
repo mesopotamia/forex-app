@@ -20,6 +20,12 @@
         controller: 'DashboardController',
         controllerAs: 'vm'
       })
+      .state('dashboard.prices', {
+        url: '/prices',
+        templateUrl: 'app/dashboard/prices.html',
+        controller: 'PriceController',
+        controllerAs: 'vm'
+      })
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/signup/signup.html',

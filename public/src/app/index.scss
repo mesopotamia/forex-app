@@ -12,9 +12,35 @@ $icon-font-path: "../../bower_components/bootstrap-sass-official/assets/fonts/bo
 // bower:scss
 // endbower
 
-
+ul > li {
+    list-style-type: none;
+}
 .field > label {
     width: 100px;
+}
+
+ul.sideNav {
+    font-size: 1.6rem;
+    padding: 10px;
+
+    li {
+        margin: 5px 0;
+    }
+
+
+}
+
+.pair {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    width: 120px;
+    height: 100px;
+    background-color: #ddd;
+    display: inline-block;
+
+    li {
+    }
 }
 
 /**

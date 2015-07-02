@@ -11,6 +11,7 @@ mongoose.connect("mongodb://localhost/test");
 
 app.use(headers());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true}));
 
 app.use("/api", usersAPI, pricesAPI);
 app.use("/rates", rates);

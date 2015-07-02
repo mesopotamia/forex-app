@@ -1,16 +1,23 @@
 var util = require('./responseUtil'),
     responses = require('./responses'),
     User = require('../../models/user'),
-    tokenUtil = require('./tokenUtil');
+    tokenUtil = require('./tokenUtil'),
+    responseUtil = require('./responseUtil');
 
 var entitlement = function (req, res, next) {
+
     var token = tokenUtil.getToken(req);
     var id = tokenUtil.getID(token);
     User.findOne({_id: id}, function (err, record) {
         if(err){
             util.send(res, responses.GLOBAL_ERROR);
         }
-        next();
+        if(record){
+            next();
+        }
+        else{
+            responseUtil.send(res, responses.INVALID_TOKEN);
+        }
     });
 };
 

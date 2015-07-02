@@ -1,1 +1,10 @@
-<h3>Welcome {{vm.user.firstName + ' ' + vm.user.lastName}}</h3>
+<ul class='sideNav col-md-4'>
+    <li><strong>Rates</strong></li>
+    <li><a href="#/dashboard/prices">prices</a></li>
+    <li><a href="#/instruments">instruments</a></li>
+</ul>
+<div ui-view class='col-md-8'>
+<div class='main '>
+    <h3>Welcome {{vm.user.firstName + ' ' + vm.user.lastName}}</h3>
+</div>
+</div>

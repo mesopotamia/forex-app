@@ -17,8 +17,9 @@
                         }
                         return response;
                     },
-                    responseError: {
+                    responseError: function (error) {
                         // TODO implement error handling
+                        return error;
                     }
                 }
             },

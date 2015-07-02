@@ -25,7 +25,7 @@ function getInstruments (req, res) {
 
 function makeFxtradeRequest (res, endpoint, params) {
 
-    params = params || '';
+    params = encodeURIComponent(params.split(',').join()) || '';
     var options = {
         url: config.fxtrade.host + endpoint + params,
         headers: {
@@ -34,14 +34,20 @@ function makeFxtradeRequest (res, endpoint, params) {
     };
     console.log(config.fxtrade.host + endpoint + params);
     request(options, function (error, response, body) {
-        if(!error && response.statusCode == 200) {
-            console.log(body);
+
+        if(error){
+            responseUtil.send(res, responses.GLOBAL_ERROR);
+            throw error;
+        }
+
+        if(response.statusCode == 200) {
             res.json({
-                data: body
+                data: JSON.parse(body)
             });
         }
         else {
             responseUtil.send(res, responses.GLOBAL_ERROR);
+            throw new Error(body);
         }
     })
 }
